@@ -1,1 +1,1 @@
-select age from client.client *
+select age from client *

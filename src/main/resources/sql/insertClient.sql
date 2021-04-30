@@ -1,4 +1,4 @@
-INSERT INTO client.client (
+INSERT INTO client (
     first_name,
     last_name,
     age,
