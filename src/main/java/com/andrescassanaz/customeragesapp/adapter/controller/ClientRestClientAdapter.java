@@ -36,9 +36,10 @@ public class ClientRestClientAdapter {
 
     @PostMapping("/creacliente")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createClient(@RequestBody @Validated CreateClientRequest createClientRequest) {
+    public ResponseEnvelope<String> createClient(@RequestBody @Validated CreateClientRequest createClientRequest) {
         log.info("Http request to /api/v1/creacliente with data" + createClientRequest);
         createClientCommand.createClient(createClientRequest.toDomain());
+        return ResponseEnvelope.of(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
     }
 
     @GetMapping("/kpideclientes")
