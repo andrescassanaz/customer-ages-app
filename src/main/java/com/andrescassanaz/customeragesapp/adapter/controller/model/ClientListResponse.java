@@ -1,13 +1,12 @@
 package com.andrescassanaz.customeragesapp.adapter.controller.model;
 
-import com.andrescassanaz.customeragesapp.application.domain.Client;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Value;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 

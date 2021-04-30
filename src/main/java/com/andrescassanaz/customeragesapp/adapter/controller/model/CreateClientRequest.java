@@ -1,6 +1,6 @@
 package com.andrescassanaz.customeragesapp.adapter.controller.model;
 
-import com.andrescassanaz.customeragesapp.application.domain.Client;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

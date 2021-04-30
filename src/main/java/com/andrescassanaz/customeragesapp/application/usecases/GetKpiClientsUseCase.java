@@ -1,7 +1,8 @@
 package com.andrescassanaz.customeragesapp.application.usecases;
 
 import com.andrescassanaz.customeragesapp.adapter.database.ClientDatabaseAdapter;
-import com.andrescassanaz.customeragesapp.application.domain.KpiClient;
+import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
+import com.andrescassanaz.customeragesapp.domain.KpiClient;
 import com.andrescassanaz.customeragesapp.application.port.in.GetKpiClientsCommand;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -13,15 +14,15 @@ import java.util.List;
 @Component
 public class GetKpiClientsUseCase implements GetKpiClientsCommand {
 
-    private final ClientDatabaseAdapter clientDatabaseAdapter;
+    private final ClientRepository clientRepository;
 
-    public GetKpiClientsUseCase(ClientDatabaseAdapter clientDatabaseAdapter) {
-        this.clientDatabaseAdapter = clientDatabaseAdapter;
+    public GetKpiClientsUseCase(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
     public KpiClient getKpiClients() {
-        List<Integer> ages = clientDatabaseAdapter.getAllAges();
+        List<Integer> ages = clientRepository.getAllAges();
         var averageAges = getAverageAges(ages);
 
         return KpiClient.builder()

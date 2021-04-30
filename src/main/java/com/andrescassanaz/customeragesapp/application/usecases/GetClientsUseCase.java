@@ -1,12 +1,11 @@
 package com.andrescassanaz.customeragesapp.application.usecases;
 
-import com.andrescassanaz.customeragesapp.adapter.database.ClientDatabaseAdapter;
-import com.andrescassanaz.customeragesapp.application.domain.Client;
 import com.andrescassanaz.customeragesapp.application.port.in.GetClientsCommand;
+import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,15 +16,15 @@ public class GetClientsUseCase implements GetClientsCommand {
 
     private static final Double PERU_LIFE_EXPECTANCY = 76.52;
 
-    private final ClientDatabaseAdapter clientDatabaseAdapter;
+    private final ClientRepository clientRepository;
 
-    public GetClientsUseCase(ClientDatabaseAdapter clientDatabaseAdapter) {
-        this.clientDatabaseAdapter = clientDatabaseAdapter;
+    public GetClientsUseCase(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
     public List<Client> getClients() {
-        List<Client> clients = clientDatabaseAdapter.getAllClients();
+        List<Client> clients = clientRepository.getAllClients();
         return clients.stream()
                 .map(client -> client.withEstimatedDateOfDeath(
                         calculateDateOfDeath(client.getBirthdate())))

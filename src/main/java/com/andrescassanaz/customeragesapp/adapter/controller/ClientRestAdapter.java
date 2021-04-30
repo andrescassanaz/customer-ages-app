@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 @Slf4j
-public class ClientRestClientAdapter {
+public class ClientRestAdapter {
 
     private final CreateClientCommand createClientCommand;
     private final GetKpiClientsCommand getKpiClientsCommand;
     private final GetClientsCommand getClientsCommand;
 
 
-    public ClientRestClientAdapter(CreateClientCommand createClientCommand, GetKpiClientsCommand getKpiClientsCommand, GetClientsCommand getClientsCommand) {
+    public ClientRestAdapter(CreateClientCommand createClientCommand, GetKpiClientsCommand getKpiClientsCommand, GetClientsCommand getClientsCommand) {
         this.createClientCommand = createClientCommand;
         this.getKpiClientsCommand = getKpiClientsCommand;
         this.getClientsCommand = getClientsCommand;

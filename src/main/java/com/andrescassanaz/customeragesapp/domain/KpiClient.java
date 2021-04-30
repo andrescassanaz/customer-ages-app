@@ -1,4 +1,4 @@
-package com.andrescassanaz.customeragesapp.application.domain;
+package com.andrescassanaz.customeragesapp.domain;
 
 import lombok.Builder;
 import lombok.Value;

@@ -1,8 +1,8 @@
 package com.andrescassanaz.customeragesapp.application.usecases;
 
-import com.andrescassanaz.customeragesapp.adapter.database.ClientDatabaseAdapter;
-import com.andrescassanaz.customeragesapp.application.domain.Client;
 import com.andrescassanaz.customeragesapp.application.port.in.CreateClientCommand;
+import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateClientUseCase implements CreateClientCommand {
 
-    private final ClientDatabaseAdapter clientDatabaseAdapter;
+    private final ClientRepository clientRepository;
 
-    public CreateClientUseCase(ClientDatabaseAdapter clientDatabaseAdapter) {
-        this.clientDatabaseAdapter = clientDatabaseAdapter;
+    public CreateClientUseCase(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
     public void createClient(Client client) {
         log.info("The user will be created: {}", client);
-        clientDatabaseAdapter.insertClient(client);
+        clientRepository.insertClient(client);
     }
 }

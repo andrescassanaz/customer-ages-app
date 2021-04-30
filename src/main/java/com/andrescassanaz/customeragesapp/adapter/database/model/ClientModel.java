@@ -1,6 +1,6 @@
 package com.andrescassanaz.customeragesapp.adapter.database.model;
 
-import com.andrescassanaz.customeragesapp.application.domain.Client;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -24,7 +24,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.5'
 
-
 	//Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -37,6 +36,10 @@ dependencies {
 	// Swagger
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+	// ArchUnit
+	testCompile "com.tngtech.archunit:archunit:0.13.0"
+	testCompile "com.tngtech.archunit:archunit-junit5:0.13.0"
 
 }
 
