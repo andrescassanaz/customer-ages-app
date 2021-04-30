@@ -10,6 +10,7 @@ import com.andrescassanaz.customeragesapp.application.port.in.GetKpiClientsComma
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +36,7 @@ public class ClientRestClientAdapter {
 
     @PostMapping("/creacliente")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createClient(@RequestBody CreateClientRequest createClientRequest) {
+    public void createClient(@RequestBody @Validated CreateClientRequest createClientRequest) {
         log.info("Http request to /api/v1/creacliente with data" + createClientRequest);
         createClientCommand.createClient(createClientRequest.toDomain());
     }

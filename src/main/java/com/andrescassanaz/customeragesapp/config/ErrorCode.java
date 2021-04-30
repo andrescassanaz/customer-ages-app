@@ -4,7 +4,9 @@ public enum ErrorCode {
 
     INTERNAL_ERROR(100, "Error interno del servidor"),
     DUPLICATE_KEY(110, "Código duplicado"),
-    INTEGRITY_VIOLATION(120, "Los datos a actualizar son inconsistentes");
+    INTEGRITY_VIOLATION(120, "Los datos a actualizar son inconsistentes"),
+    INVALID_REQUEST(130, "El request es inválido");
+
 
     private final int value;
     private final String reasonPhrase;

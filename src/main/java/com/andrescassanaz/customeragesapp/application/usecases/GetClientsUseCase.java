@@ -28,15 +28,14 @@ public class GetClientsUseCase implements GetClientsCommand {
         List<Client> clients = clientDatabaseAdapter.getAllClients();
         return clients.stream()
                 .map(client -> client.withEstimatedDateOfDeath(
-                        calculateDateOfDeath(client.getAge())))
+                        calculateDateOfDeath(client.getBirthdate())))
                 .collect(Collectors.toList());
     }
 
-    private LocalDate calculateDateOfDeath(Integer age){
-        Double remainingTime = PERU_LIFE_EXPECTANCY - age;
-        Integer remainingYears = remainingTime.intValue();
-        Double remainingDays = (remainingTime - remainingYears) * 365;
-        LocalDate estimatedDateOfDeath = LocalDate.now().plusYears(remainingYears.intValue()).plusDays(remainingDays.intValue());
+    private LocalDate calculateDateOfDeath(LocalDate birthdate){
+        Integer remainingYears = PERU_LIFE_EXPECTANCY.intValue();
+        Double remainingDays = (PERU_LIFE_EXPECTANCY - remainingYears) * 365;
+        LocalDate estimatedDateOfDeath = birthdate.plusYears(remainingYears).plusDays(remainingDays.intValue());
         return estimatedDateOfDeath;
     }
 }
