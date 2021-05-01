@@ -1,9 +1,8 @@
 package com.andrescassanaz.customeragesapp.application.usecases;
 
-import com.andrescassanaz.customeragesapp.adapter.database.ClientDatabaseAdapter;
+import com.andrescassanaz.customeragesapp.application.port.in.GetKpiClientsCommand;
 import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
 import com.andrescassanaz.customeragesapp.domain.KpiClient;
-import com.andrescassanaz.customeragesapp.application.port.in.GetKpiClientsCommand;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
