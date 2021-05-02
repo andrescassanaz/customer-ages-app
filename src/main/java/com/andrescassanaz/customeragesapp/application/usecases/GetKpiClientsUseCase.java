@@ -19,6 +19,8 @@ public class GetKpiClientsUseCase implements GetKpiClientsCommand {
         this.clientRepository = clientRepository;
     }
 
+    private final static Double ZERO = 0.0;
+
     @Override
     public KpiClient getKpiClients() {
         List<Integer> ages = clientRepository.getAllAges();
@@ -34,11 +36,11 @@ public class GetKpiClientsUseCase implements GetKpiClientsCommand {
         return ages.stream()
                 .mapToInt(age -> age)
                 .average()
-                .orElse(0.0);
+                .orElse(ZERO);
     }
 
     private double getStandardDeviation(List<Integer> ages, Double averageAges) {
-        if (ages.isEmpty()) return 0.0;
+        if (ages.isEmpty()) return ZERO;
         val sum = ages.stream()
                 .mapToDouble(age -> Math.pow(age - averageAges, 2))
                 .sum();

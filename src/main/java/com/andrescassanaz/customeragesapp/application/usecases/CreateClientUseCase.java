@@ -18,7 +18,6 @@ public class CreateClientUseCase implements CreateClientCommand {
 
     @Override
     public void createClient(Client client) {
-        log.info("The user will be created: {}", client);
         clientRepository.insertClient(client);
     }
 }

@@ -37,21 +37,21 @@ public class ClientRestAdapter {
     @PostMapping("/creacliente")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEnvelope<String> createClient(@RequestBody @Validated CreateClientRequest createClientRequest) {
-        log.info("Http request to /api/v1/creacliente with data" + createClientRequest);
+        log.info("Peticion http a /api/v1/creacliente with data" + createClientRequest);
         createClientCommand.createClient(createClientRequest.toDomain());
         return ResponseEnvelope.of(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
     }
 
     @GetMapping("/kpideclientes")
     public ResponseEnvelope<KpiClientsResponse> getKpiClients() {
-        log.info("Http request to /api/v1/kpideclientes");
+        log.info("Peticion http a /api/v1/kpideclientes");
         val kpiClients = getKpiClientsCommand.getKpiClients();
         return ResponseEnvelope.ok(KpiClientsResponse.from(kpiClients));
     }
 
     @GetMapping("/listclientes")
     public ResponseEnvelope<ClientListResponse> getClientsList() {
-        log.info("Http request to /api/v1/listclientes");
+        log.info("Peticion http a /api/v1/listclientes");
         val clients = getClientsCommand.getClients();
         return ResponseEnvelope.ok(ClientListResponse.from(clients));
     }

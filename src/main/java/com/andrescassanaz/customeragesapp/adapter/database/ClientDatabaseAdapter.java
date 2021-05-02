@@ -33,7 +33,6 @@ public class ClientDatabaseAdapter implements ClientRepository {
     @Override
     public int insertClient(Client client) {
         final ClientModel model = ClientModel.from(client);
-        log.info("Se va a insertar el cliente {}", model);
         final SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(model);
         return appJdbcTemplate.insert(insertClientSql, sqlParameterSource);
     }

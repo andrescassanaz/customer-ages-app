@@ -34,6 +34,7 @@ public class AppJdbcTemplate {
 
     public int insert(String sql, SqlParameterSource source) {
         return safeExecute(() -> {
+            log.info("Se va a insertar el registro de la clase {} para SQL \n{}", source, sql);
             final KeyHolder keyHolder = new GeneratedKeyHolder();
             final int numberOfAffectedRows = jdbcTemplate.update(sql, source, keyHolder, new String[]{"id"});
             final int generatedId = Optional.ofNullable(keyHolder.getKey()).map(Number::intValue).orElse(-1);
@@ -44,14 +45,14 @@ public class AppJdbcTemplate {
 
     public <T> List<T> queryForList(String sql, Class<T> clazz) {
         return safeExecute(() -> {
-            log.debug("Se van a buscar registros de la clase {} para SQL \n{}\ncon parámetros {}", clazz.getSimpleName(), sql);
+            log.info("Se van a buscar registros de la clase {} para SQL: \n{}", clazz.getSimpleName(), sql);
             return jdbcOperations.queryForList(sql, clazz);
         });
     }
 
     public <T> List<T> query(String sql, Class<T> clazz) {
         return safeExecute(() -> {
-            log.debug("Se van a buscar registros de la clase {} para SQL \n{}\ncon parámetros {}",
+            log.info("Se van a buscar registros de la clase {} para SQL \n{}",
                     clazz.getSimpleName(), sql);
             return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(clazz));
         });
