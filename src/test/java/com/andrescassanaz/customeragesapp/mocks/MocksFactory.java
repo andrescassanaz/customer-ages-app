@@ -11,7 +11,7 @@ import com.andrescassanaz.customeragesapp.domain.KpiClient;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Mocks {
+public class MocksFactory {
 
     public static CreateClientRequest getCreateClientRequestMock() {
         return CreateClientRequest.builder()
@@ -31,18 +31,18 @@ public class Mocks {
                 .build();
     }
 
-    public static List<Integer> getAllAgesMock(){
-        return List.of(20,40,60,80);
+    public static List<Integer> getAllAgesMock() {
+        return List.of(20, 40, 60, 80);
     }
 
-    public static KpiClient getKpiClientDomainMock(){
+    public static KpiClient getKpiClientDomainMock() {
         return KpiClient.builder()
                 .averageAgeOfClients(50.0)
                 .standardDeviationAcrossAllAges(22.360679774997898)
                 .build();
     }
 
-    public static KpiClientsResponse getKpiClientResponseMock(){
+    public static KpiClientsResponse getKpiClientResponseMock() {
         return KpiClientsResponse.builder()
                 .averageAgeOfClients(50.0)
                 .standardDeviationAcrossAllAges(22.360679774997898)
@@ -73,7 +73,7 @@ public class Mocks {
                         .lastName("Cassanaz")
                         .age(32)
                         .birthdate(LocalDate.of(1988, 11, 29))
-                        .estimatedDateOfDeath(LocalDate.of(2065,6,6))
+                        .estimatedDateOfDeath(LocalDate.of(2065, 6, 6))
                         .build(),
                 Client.builder()
                         .firstName("Rocio")
@@ -85,7 +85,7 @@ public class Mocks {
         );
     }
 
-    public static List<ClientModel> getClientModelListMock(){
+    public static List<ClientModel> getClientModelListMock() {
         return List.of(
                 ClientModel.builder()
                         .firstName("Andres")
@@ -102,7 +102,7 @@ public class Mocks {
         );
     }
 
-    public static ClientListResponse getClientListResponseMock(){
+    public static ClientListResponse getClientListResponseMock() {
         return ClientListResponse.builder()
                 .clients(List.of(
                         ClientResponse.builder()
@@ -110,7 +110,7 @@ public class Mocks {
                                 .lastName("Cassanaz")
                                 .age(32)
                                 .birthdate(LocalDate.of(1988, 11, 29))
-                                .estimatedDateOfDeath(LocalDate.of(2065,6,6))
+                                .estimatedDateOfDeath(LocalDate.of(2065, 6, 6))
                                 .build(),
                         ClientResponse.builder()
                                 .firstName("Rocio")
@@ -135,6 +135,14 @@ public class Mocks {
     public static ClientResponse getClickResponseMock() {
         return ClientResponse.builder()
                 .firstName("Andres")
+                .lastName("Cassanaz")
+                .age(32)
+                .birthdate(LocalDate.of(1988, 11, 29))
+                .build();
+    }
+
+    public static CreateClientRequest getCreateClientRequestBadRequestMock() {
+        return CreateClientRequest.builder()
                 .lastName("Cassanaz")
                 .age(32)
                 .birthdate(LocalDate.of(1988, 11, 29))

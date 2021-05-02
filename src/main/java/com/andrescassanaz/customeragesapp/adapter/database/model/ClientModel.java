@@ -18,7 +18,7 @@ public class ClientModel {
     Integer age;
     LocalDate birthdate;
 
-    public static ClientModel from(Client client){
+    public static ClientModel from(Client client) {
         return ClientModel.builder()
                 .firstName(client.getFirstName())
                 .lastName(client.getLastName())

@@ -2,7 +2,7 @@ package com.andrescassanaz.customeragesapp.application.usecases;
 
 import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
 import com.andrescassanaz.customeragesapp.domain.KpiClient;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,9 +21,9 @@ public class GetKpiClientsUseCaseTest {
     void createClientOk() {
         ClientRepository mockedClientRepository = Mockito.mock(ClientRepository.class);
 
-        var expectedResponse = Mocks.getKpiClientDomainMock();
+        var expectedResponse = MocksFactory.getKpiClientDomainMock();
 
-        when(mockedClientRepository.getAllAges()).thenReturn(Mocks.getAllAgesMock());
+        when(mockedClientRepository.getAllAges()).thenReturn(MocksFactory.getAllAgesMock());
 
         GetKpiClientsUseCase usecase = new GetKpiClientsUseCase(mockedClientRepository);
 

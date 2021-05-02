@@ -1,6 +1,5 @@
 package com.andrescassanaz.customeragesapp.adapter.database.exception;
 
-
 import com.andrescassanaz.customeragesapp.config.ErrorCode;
 import com.andrescassanaz.customeragesapp.config.GenericException;
 

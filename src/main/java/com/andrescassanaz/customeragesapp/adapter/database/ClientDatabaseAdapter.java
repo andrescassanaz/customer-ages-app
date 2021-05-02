@@ -1,8 +1,8 @@
 package com.andrescassanaz.customeragesapp.adapter.database;
 
 import com.andrescassanaz.customeragesapp.adapter.database.model.ClientModel;
-import com.andrescassanaz.customeragesapp.domain.Client;
 import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
+import com.andrescassanaz.customeragesapp.domain.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -26,7 +26,7 @@ public class ClientDatabaseAdapter implements ClientRepository {
     public ClientDatabaseAdapter(AppJdbcTemplate appJdbcTemplate, SqlReader sqlReader) {
         this.appJdbcTemplate = appJdbcTemplate;
         this.insertClientSql = sqlReader.readSql(INSERT_CLIENT_SQL_PATH);
-        this.getAllAgesSql= sqlReader.readSql(GET_ALL_AGES_SQL_PATH);
+        this.getAllAgesSql = sqlReader.readSql(GET_ALL_AGES_SQL_PATH);
         this.getAllClients = sqlReader.readSql(GET_ALL_CLIENTS_SQL_PATH);
     }
 
@@ -39,12 +39,12 @@ public class ClientDatabaseAdapter implements ClientRepository {
     }
 
     @Override
-    public List<Integer> getAllAges(){
+    public List<Integer> getAllAges() {
         return appJdbcTemplate.queryForList(getAllAgesSql, Integer.class);
     }
 
     @Override
-    public List<Client> getAllClients(){
+    public List<Client> getAllClients() {
         List<ClientModel> clientList = appJdbcTemplate.query(getAllClients, ClientModel.class);
         return clientList
                 .stream()

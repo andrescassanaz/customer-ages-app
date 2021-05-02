@@ -31,7 +31,7 @@ public class GetClientsUseCase implements GetClientsCommand {
                 .collect(Collectors.toList());
     }
 
-    private LocalDate calculateDateOfDeath(LocalDate birthdate){
+    private LocalDate calculateDateOfDeath(LocalDate birthdate) {
         Integer remainingYears = PERU_LIFE_EXPECTANCY.intValue();
         Double remainingDays = (PERU_LIFE_EXPECTANCY - remainingYears) * 365;
         LocalDate estimatedDateOfDeath = birthdate.plusYears(remainingYears).plusDays(remainingDays.intValue());

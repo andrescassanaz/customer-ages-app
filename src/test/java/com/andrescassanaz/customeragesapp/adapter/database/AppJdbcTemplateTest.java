@@ -1,7 +1,7 @@
 package com.andrescassanaz.customeragesapp.adapter.database;
 
 import com.andrescassanaz.customeragesapp.adapter.database.model.ClientModel;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +52,7 @@ public class AppJdbcTemplateTest {
     void queryOk() {
         // Given
         final AppJdbcTemplate appJdbcTemplate = new AppJdbcTemplate(jdbcTemplate, jdbcOperations);
-        final List<ClientModel> expected = Mocks.getClientModelListMock();
+        final List<ClientModel> expected = MocksFactory.getClientModelListMock();
         when(jdbcTemplate.query(eq(SQL), isA(BeanPropertyRowMapper.class))).thenReturn(expected);
 
         // When
@@ -67,7 +67,7 @@ public class AppJdbcTemplateTest {
     void queryForListOk() {
         // Given
         final AppJdbcTemplate appJdbcTemplate = new AppJdbcTemplate(jdbcTemplate, jdbcOperations);
-        final List<Integer> expected = Mocks.getAllAgesMock();
+        final List<Integer> expected = MocksFactory.getAllAgesMock();
         when(jdbcOperations.queryForList(SQL, Integer.class)).thenReturn(expected);
 
         // When

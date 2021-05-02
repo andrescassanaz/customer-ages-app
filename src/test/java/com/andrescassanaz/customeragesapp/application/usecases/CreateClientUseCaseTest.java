@@ -1,7 +1,7 @@
 package com.andrescassanaz.customeragesapp.application.usecases;
 
 import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ public class CreateClientUseCaseTest {
         ClientRepository mockedClientRepository = Mockito.mock(ClientRepository.class);
 
         CreateClientUseCase usecase = new CreateClientUseCase(mockedClientRepository);
-        usecase.createClient(Mocks.getClientDomainMock());
+        usecase.createClient(MocksFactory.getClientDomainMock());
         verify(mockedClientRepository, times(1)).insertClient(any());
     }
 

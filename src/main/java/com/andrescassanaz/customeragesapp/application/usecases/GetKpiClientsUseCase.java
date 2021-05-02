@@ -38,6 +38,7 @@ public class GetKpiClientsUseCase implements GetKpiClientsCommand {
     }
 
     private double getStandardDeviation(List<Integer> ages, Double averageAges) {
+        if (ages.isEmpty()) return 0.0;
         val sum = ages.stream()
                 .mapToDouble(age -> Math.pow(age - averageAges, 2))
                 .sum();

@@ -1,8 +1,6 @@
 package com.andrescassanaz.customeragesapp.adapter.database;
 
-import com.andrescassanaz.customeragesapp.adapter.database.model.ClientModel;
-import com.andrescassanaz.customeragesapp.domain.Client;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,15 +8,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,7 +24,7 @@ public class ClientDatabaseAdapterTest {
 
     private static final SqlReader sqlReader = mock(SqlReader.class);
     private static final String SQL = "SELECT 1;";
-    private static final SqlParameterSource SOURCE = new BeanPropertySqlParameterSource(Mocks.getClientModelMock());
+    private static final SqlParameterSource SOURCE = new BeanPropertySqlParameterSource(MocksFactory.getClientModelMock());
 
     @BeforeAll
     static void setSqlReader() {
@@ -45,7 +40,7 @@ public class ClientDatabaseAdapterTest {
         var expectedCreatedId = 1;
         when(appJdbcTemplate.insert(any(), any())).thenReturn(1);
 
-        var actualResponse = adapter.insertClient(Mocks.getClientDomainMock());
+        var actualResponse = adapter.insertClient(MocksFactory.getClientDomainMock());
         assertEquals(expectedCreatedId, actualResponse);
     }
 
@@ -68,8 +63,8 @@ public class ClientDatabaseAdapterTest {
         AppJdbcTemplate appJdbcTemplate = Mockito.mock(AppJdbcTemplate.class);
         ClientDatabaseAdapter adapter = new ClientDatabaseAdapter(appJdbcTemplate, sqlReader);
 
-        var expectedResponse = List.of(Mocks.getClientDomainMock());
-        when(appJdbcTemplate.query(any(), any())).thenReturn(List.of(Mocks.getClientModelMock()));
+        var expectedResponse = List.of(MocksFactory.getClientDomainMock());
+        when(appJdbcTemplate.query(any(), any())).thenReturn(List.of(MocksFactory.getClientModelMock()));
 
         var actualResponse = adapter.getAllClients();
         assertEquals(expectedResponse, actualResponse);

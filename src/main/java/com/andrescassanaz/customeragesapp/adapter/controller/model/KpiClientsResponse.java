@@ -15,7 +15,7 @@ public class KpiClientsResponse {
     private Double averageAgeOfClients;
     private Double standardDeviationAcrossAllAges;
 
-    public static KpiClientsResponse from(KpiClient kpiClient){
+    public static KpiClientsResponse from(KpiClient kpiClient) {
         return KpiClientsResponse.builder()
                 .averageAgeOfClients(kpiClient.getAverageAgeOfClients())
                 .standardDeviationAcrossAllAges(kpiClient.getStandardDeviationAcrossAllAges())

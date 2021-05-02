@@ -7,7 +7,8 @@ import com.andrescassanaz.customeragesapp.adapter.controller.model.ResponseEnvel
 import com.andrescassanaz.customeragesapp.application.port.in.CreateClientCommand;
 import com.andrescassanaz.customeragesapp.application.port.in.GetClientsCommand;
 import com.andrescassanaz.customeragesapp.application.port.in.GetKpiClientsCommand;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.config.ErrorCode;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,7 +57,7 @@ public class ClientRestAdapterTest {
     @Test
     @DisplayName("When createClient is called, the CreateClientCommand is called once")
     void createClientCallCommand() throws Exception {
-        CreateClientRequest clientRequest = Mocks.getCreateClientRequestMock();
+        CreateClientRequest clientRequest = MocksFactory.getCreateClientRequestMock();
         final String requestContent =
                 objectMapper.writeValueAsString(clientRequest);
 
@@ -69,7 +71,7 @@ public class ClientRestAdapterTest {
     @Test
     @DisplayName("When createClient is called, the adapter return 201 created status")
     void createClientOk() throws Exception {
-        CreateClientRequest clientRequest = Mocks.getCreateClientRequestMock();
+        CreateClientRequest clientRequest = MocksFactory.getCreateClientRequestMock();
         final String requestContent =
                 objectMapper.writeValueAsString(clientRequest);
 
@@ -83,7 +85,7 @@ public class ClientRestAdapterTest {
     @DisplayName("When getKpiClients is called, the adapter return the kpi information")
     void getKpiClientsOk() throws Exception {
 
-        final var commandResponse = Mocks.getKpiClientDomainMock();
+        final var commandResponse = MocksFactory.getKpiClientDomainMock();
 
         final var endpointResponse = ResponseEnvelope.ok(
                 KpiClientsResponse.from(commandResponse));
@@ -100,7 +102,7 @@ public class ClientRestAdapterTest {
     @DisplayName("When getClientsList is called, the adapter return the list of clients")
     void getClientsList() throws Exception {
 
-        final var commandResponse = Mocks.getClientListDomainMock();
+        final var commandResponse = MocksFactory.getClientListDomainMock();
 
         final var endpointResponse = ResponseEnvelope.ok(ClientListResponse.from(commandResponse));
 
@@ -109,6 +111,27 @@ public class ClientRestAdapterTest {
         final String expectedJson = objectMapper.writeValueAsString(endpointResponse);
 
         mockMvc.perform(get(URL_LIST_CLIENTS))
+                .andExpect(content().json(expectedJson));
+    }
+
+
+    @Test
+    @DisplayName("when createClient is called, the adapter should return bad request")
+    void createCouponInvalidRequest() throws Exception {
+        final String requestContent = objectMapper.writeValueAsString(
+                MocksFactory.getCreateClientRequestBadRequestMock()
+        );
+
+        final var errorCode = ErrorCode.INVALID_REQUEST;
+        final String expectedJson =
+                "{\"status\":400,\"code\":" + errorCode.value() + "," +
+                        "\"detail\":\"El request es inválido, [firstName: must not be blank]\"}";
+
+        mockMvc.perform(post(URL_CREATE_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestContent))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().json(expectedJson));
     }
 }

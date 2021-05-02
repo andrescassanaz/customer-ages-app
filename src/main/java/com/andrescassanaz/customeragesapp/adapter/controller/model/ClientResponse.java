@@ -20,7 +20,7 @@ public class ClientResponse {
     LocalDate birthdate;
     LocalDate estimatedDateOfDeath;
 
-    public static ClientResponse from(Client client){
+    public static ClientResponse from(Client client) {
         return ClientResponse.builder()
                 .firstName(client.getFirstName())
                 .lastName(client.getLastName())

@@ -43,14 +43,14 @@ public class ClientRestAdapter {
     }
 
     @GetMapping("/kpideclientes")
-    public ResponseEnvelope<KpiClientsResponse> getKpiClients(){
+    public ResponseEnvelope<KpiClientsResponse> getKpiClients() {
         log.info("Http request to /api/v1/kpideclientes");
         val kpiClients = getKpiClientsCommand.getKpiClients();
         return ResponseEnvelope.ok(KpiClientsResponse.from(kpiClients));
     }
 
     @GetMapping("/listclientes")
-    public ResponseEnvelope<ClientListResponse> getClientsList(){
+    public ResponseEnvelope<ClientListResponse> getClientsList() {
         log.info("Http request to /api/v1/listclientes");
         val clients = getClientsCommand.getClients();
         return ResponseEnvelope.ok(ClientListResponse.from(clients));

@@ -6,9 +6,7 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.library.Architectures;
 
-
 @AnalyzeClasses(packages = "com.andrescassanaz.customeragesapp", importOptions = ImportOption.DoNotIncludeTests.class)
-@SuppressWarnings("squid:S2187")
 public class LayeredArchitectureTest {
 
     private static final String DOMAIN = "Domain";
@@ -27,5 +25,4 @@ public class LayeredArchitectureTest {
             .whereLayer(APPLICATION).mayOnlyBeAccessedByLayers(ADAPTERS, CONFIG)
             .whereLayer(ADAPTERS).mayOnlyBeAccessedByLayers(CONFIG)
             .whereLayer(DOMAIN).mayOnlyBeAccessedByLayers(APPLICATION, ADAPTERS, CONFIG);
-
 }

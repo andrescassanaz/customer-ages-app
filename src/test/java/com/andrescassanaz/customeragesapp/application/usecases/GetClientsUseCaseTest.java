@@ -2,7 +2,7 @@ package com.andrescassanaz.customeragesapp.application.usecases;
 
 import com.andrescassanaz.customeragesapp.application.port.out.ClientRepository;
 import com.andrescassanaz.customeragesapp.domain.Client;
-import com.andrescassanaz.customeragesapp.mocks.Mocks;
+import com.andrescassanaz.customeragesapp.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,9 +23,9 @@ public class GetClientsUseCaseTest {
     void getClientsOk() {
         ClientRepository mockedClientRepository = Mockito.mock(ClientRepository.class);
 
-        var expectedResponse = Mocks.getClientListWithDeathDateDomainMock();
+        var expectedResponse = MocksFactory.getClientListWithDeathDateDomainMock();
 
-        when(mockedClientRepository.getAllClients()).thenReturn(Mocks.getClientListDomainMock());
+        when(mockedClientRepository.getAllClients()).thenReturn(MocksFactory.getClientListDomainMock());
 
         GetClientsUseCase usecase = new GetClientsUseCase(mockedClientRepository);
 
