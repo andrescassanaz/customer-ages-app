@@ -117,7 +117,7 @@ public class ClientRestAdapterTest {
 
     @Test
     @DisplayName("when createClient is called, the adapter should return bad request")
-    void createCouponInvalidRequest() throws Exception {
+    void createClientInvalidRequest() throws Exception {
         final String requestContent = objectMapper.writeValueAsString(
                 MocksFactory.getCreateClientRequestBadRequestMock()
         );
@@ -126,6 +126,46 @@ public class ClientRestAdapterTest {
         final String expectedJson =
                 "{\"status\":400,\"code\":" + errorCode.value() + "," +
                         "\"detail\":\"El request es inválido, [firstName: must not be blank]\"}";
+
+        mockMvc.perform(post(URL_CREATE_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestContent))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json(expectedJson));
+    }
+
+    @Test
+    @DisplayName("when createClient is called with wrong birthdate format, the adapter should return bad request")
+    void createClientWrongBirthdateFormat() throws Exception {
+        final String requestContent = objectMapper.writeValueAsString(
+                MocksFactory.getCreateClientRequestWrongBirthdateFormat()
+        );
+
+        final var errorCode = ErrorCode.INVALID_REQUEST;
+        final String expectedJson =
+                "{\"status\":400,\"code\":" + errorCode.value() + "," +
+                        "\"detail\":\"El request es inválido, [birthdate: La fecha de nacimiento tiene que ser anterior al dia de la fecha, y debe tener el formato yyyy-MM-dd]\"}";
+
+        mockMvc.perform(post(URL_CREATE_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestContent))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json(expectedJson));
+    }
+
+    @Test
+    @DisplayName("when createClient is called with birthdate after or equal to today, the adapter should return bad request")
+    void createClientBirthdateAfterOrEqualToToday() throws Exception {
+        final String requestContent = objectMapper.writeValueAsString(
+                MocksFactory.getCreateClientRequestWrongBirthdate()
+        );
+
+        final var errorCode = ErrorCode.INVALID_REQUEST;
+        final String expectedJson =
+                "{\"status\":400,\"code\":" + errorCode.value() + "," +
+                        "\"detail\":\"El request es inválido, [birthdate: La fecha de nacimiento tiene que ser anterior al dia de la fecha, y debe tener el formato yyyy-MM-dd]\"}";
 
         mockMvc.perform(post(URL_CREATE_CLIENT)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -18,7 +18,7 @@ public class MocksFactory {
                 .firstName("Andres")
                 .lastName("Cassanaz")
                 .age(32)
-                .birthdate(LocalDate.of(1988, 11, 29))
+                .birthdate("1988-11-29")
                 .build();
     }
 
@@ -145,7 +145,24 @@ public class MocksFactory {
         return CreateClientRequest.builder()
                 .lastName("Cassanaz")
                 .age(32)
-                .birthdate(LocalDate.of(1988, 11, 29))
+                .birthdate("1988-11-29")
+                .build();
+    }
+
+    public static CreateClientRequest getCreateClientRequestWrongBirthdateFormat() {
+        return CreateClientRequest.builder()
+                .firstName("Andres")
+                .lastName("Cassanaz")
+                .age(32)
+                .birthdate("wrongformat")
+                .build();
+    }
+    public static CreateClientRequest getCreateClientRequestWrongBirthdate() {
+        return CreateClientRequest.builder()
+                .firstName("Andres")
+                .lastName("Cassanaz")
+                .age(32)
+                .birthdate("2099-01-01")
                 .build();
     }
 }
