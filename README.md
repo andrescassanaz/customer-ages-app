@@ -28,6 +28,12 @@
 - Swagger generado mediante [Springfox](https://springfox.github.io/springfox/)
 - Deployado en [Heroku](https://dashboard.heroku.com/).
 
+## Docker
+Se puede levantar el proyecto mediante docker compose:
+``` bash
+cd src/docker && docker-compose up -d
+```
+
 ## Documentacion
 [![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://fast-retreat-49389.herokuapp.com/swagger-ui.html#/)
 
